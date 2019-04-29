@@ -39,11 +39,15 @@ echo "Year : ";
 $year = trim(fgets(STDIN));
 echo "\n";
 
+$count = 0;
 $FL = friendlist($fbtoken);
+$totalFL = count($FL);
 foreach($FL as $list){
+	$count++;
 	$name = $list['name'];
 	$id = $list['id'];
 	$date = last_active($id, $fbtoken);
+	echo Console::cyan("(" .$count. "/" .$totalFL. ")");
 	if($date < $year){
 		echo Console::red('[INACTIVE]').' '.$name.' ~ '.$date.' '.unfriend($id, $fbtoken);
 		echo "\r\n";
